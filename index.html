@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>抓住2016年的温暖</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		
+		<link rel="stylesheet" href="base.css" />
+		<link rel="stylesheet" type="text/css" href="game.css">		
+		<link rel="stylesheet" href="other.css" />
+		<link rel="stylesheet" href="animations.css" />
+		<link rel="stylesheet" href="canvas/canvas.css">
+		<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" ></script>
+		<script type="text/javascript">
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+		</script>
+		<script type="text/javascript">
+		var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260924585'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1260924585' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</head>
+
+	<body>
+		<div class="indexAni">
+			<div class="cont1 fadeInDown"></div>
+			<div class="cont2 zoomIn"></div>
+			<div class="cont3 fadeInUp"></div>
+		</div>
+		
+		<div class="gameMusic">
+			<audio src="game.mp3" loop="loop"></audio>
+		</div>
+		
+		<div id="ajaxbar" style="background: none;display: none;">
+			<div id="game" style="visibility: visible;">
+				<canvas id="canvas" width="540" height="960" style="width: 375px; height: 667px;"></canvas>
+			</div>
+
+			<div id="orientate" style="width: 375px; height: 667px; display: none; visibility: hidden;">
+				<img src="">
+			</div>
+			<div id="play" class="play" style="width: 375px; height: 667px; display: none; visibility: hidden;">
+				<img src="media/graphics/splash/mobile/cover-start.jpg">
+			</div>
+
+		</div>
+		
+		<!--浮层-->
+		<div id="endGame">
+			<div id="timeOut">
+				<div class="space"></div>
+				<div class="gameover_tc">
+					<h5>时间到  游戏结束！</h5>
+					<p>想知道你一共收集到了多少温暖关键词吗？</p>
+					<span>去看看</span>
+				</div>
+			</div>
+			
+			<div id="userMainword">
+				<div class="space"></div>
+				<div class="gameover_tc">
+					<p>接到了这么多“艺术人生”节目往年盘点出的温暖关键词，有没有哪一个词能代表你的2016呢？</p>
+				</div>
+				<div class="mainwordInput">
+					<textarea placeholder="点此填写你的温暖关键词!" id="comment"></textarea>
+					<div class="mainwordSubmit" onclick="addCom();">确定</div>
+				</div>
+			</div>
+
+			<div id="keywordMap">
+				<div class="inner">
+					<!-- <h3>恭喜你王庚然，共收集到了56个温暖关键词，已超过了全国90%的网友，将获得机会在中央三套2016年12月31日晚XX点的《艺术人生——温暖2016》节目中登录虚拟观众席</h3> -->
+					<canvas id="keyMapCanvas" width="" height="">
+						<p>您的浏览器不支持Canvas</p>
+					</canvas>
+					<img src="" alt="" id="img1">
+					<!-- <div class="code">
+						<img id="qrcode" src="" alt="QRCode">
+						<p>长按扫描二维码，来找找你的2016温暖关键词是什么</p>
+						<div class="clear"></div>
+					</div> -->
+				</div>
+				<button class="playAgain"></button>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="game2.js"></script>
+		<script type="text/javascript" src="jquery.js" ></script>
+		<script type="text/javascript" src="canvas/jquery.cookie.min.js" ></script>
+		<script type="text/javascript" src="canvas/share.js"></script>
+		<script type="text/javascript" src="canvas/common.js"></script>
+		<script type="text/javascript" src="canvas/canvas.js"></script> 
+		<script>
+			$(document).ready(function(){
+				$(".indexAni").on("click",function(){
+					$("#ajaxbar").show();
+					$(this).hide();
+					$(".gameMusic audio").get(0).play();
+				});
+				
+				$(".gameover_tc span").on("click",function(){
+					$("#userMainword").show();
+					$("#timeOut").hide();
+				});
+
+				$('.mainwordSubmit').on("click",function(){
+					// $('#userMainword').hide();
+					// var drawCanvas = new DrawCanvas();
+				});
+
+				$('.playAgain').on('click', function(){
+					window.location.reload();
+				});
+			});	
+			
+			var browser = {
+				  versions: function () {
+					  var u = navigator.userAgent, app = navigator.appVersion;
+					  return {//移动终端浏览器版本信息
+					   trident: u.indexOf('Trident') > -1, //IE内核
+					   presto: u.indexOf('Presto') > -1, //opera内核
+					   webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+					   gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+					   mobile: !!u.match(/AppleWebKit.*Mobile/i) || !!u.match(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/), //是否为移动终端
+					   ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+					   android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+					   iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+					   iPad: u.indexOf('iPad') > -1, //是否iPad
+					   webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+					  };
+				  } (),
+				  language: (navigator.browserLanguage || navigator.language).toLowerCase()
+				}
+				if (browser.versions.iPhone || browser.versions.iPad || browser.versions.ios) {
+				
+				}
+				var temp = false;  //没有弹出软键盘
+				if (browser.versions.android) {
+					var screenHeight = window.innerHeight
+								|| document.documentElement.clientHeight
+								|| document.body.clientHeight;
+					$(".mainwordInput textarea").focus(function(){
+						//$(".usermsg").addClass("numbleani").removeClass("compani").removeClass("jobani").removeClass("returnani");				
+						$("#userMainword").css("margin-top","-2rem");
+					});
+					$(".mainwordInput textarea").blur(function(){
+								
+						$("#userMainword").css("margin-top","0rem");
+					});
+				}
+		</script>
+	</body>
+
+</html>

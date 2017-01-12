@@ -1,0 +1,19 @@
+.l_comment {
+    background: rgba(0, 0, 0, 0) url("../img/black.png") no-repeat scroll 0 0 / 100% auto;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+.l_loading {
+    background: rgba(0, 0, 0, 0) url("../img/load.gif") no-repeat scroll 0 0 / 100% auto;
+    border-radius: 0.1rem;
+    height: 1.4rem;
+    left: 50%;
+    margin-left: -0.5rem;
+    position: absolute;
+    top: 45%;
+    width: 1.4rem;
+}

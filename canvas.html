@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>抓住2016年的温暖</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		
+		<link rel="stylesheet" href="base.css" />
+		<link rel="stylesheet" type="text/css" href="game.css">		
+		<link rel="stylesheet" href="other.css" />
+		<link rel="stylesheet" href="animations.css" />
+		<link rel="stylesheet" href="canvas/canvas.css">
+		<script type="text/javascript">
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + 'px';
+		</script>
+	</head>
+
+	<body>
+		<!--浮层-->
+		<div id="">
+
+			<div id="keywordMap">
+				<div class="inner">
+				<!-- 	<h3>恭喜你王庚然，共收集到了56个温暖关键词，已超过了全国90%的网友，将获得机会在中央三套2016年12月31日晚XX点的《艺术人生——温暖2016》节目中登录虚拟观众席</h3> -->
+					<canvas id="keyMapCanvas" width="" height="">
+						<p>您的浏览器不支持Canvas</p>
+					</canvas>
+					<!-- <img src="" alt="" id="img1"> -->
+					<!-- <div class="code">
+						<img id="qrcode" src="" alt="QRCode">
+						<p>长按扫描二维码，来找找你的2016温暖关键词是什么</p>
+						<div class="clear"></div>
+					</div> -->
+				</div>
+				<button class="playAgain"></button>
+			</div>
+		</div>
+		
+		
+		<script type="text/javascript" src="jquery.js" ></script>
+		<script type="text/javascript" src="canvas/canvas.js"></script> 
+		<script>
+			$(document).ready(function(){
+				$(".indexAni").on("click",function(){
+					$("#ajaxbar").show();
+					$(this).hide();
+				});
+				
+				$(".gameover_tc span").on("click",function(){
+					$("#userMainword").show();
+					$("#timeOut").hide();
+				});
+
+				$('.mainwordSubmit').on("click",function(){
+					$('#userMainword').hide();
+					
+				});
+
+				var drawCanvas = new DrawCanvas();
+			});			
+		</script>
+	</body>
+
+</html>
